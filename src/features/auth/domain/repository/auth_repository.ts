@@ -6,7 +6,7 @@ export interface AuthRepository {
 
     signInWithEmailAndPassword(email: string, password: string): Promise<Either<Failure, User>>;
 
-    signUpWithEmailAndPassword(id: string, email: string, name: string, password: string): Promise<Either<Failure, User>>;
+    signUpWithEmailAndPassword(id: string, email: string, password: string, name: string): Promise<Either<Failure, User>>;
 
     getCurrent(): Promise<Either<Failure, User>>;
 }

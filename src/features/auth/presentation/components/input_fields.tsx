@@ -21,6 +21,7 @@ const InputFields = ({label, placeholder, value, onChange, type}: inputFieldProp
                 {label}
             </label>
             <input
+                id={label}
                 className="w-full h-[50px] px-[15px] py-[11px] rounded-[10px] placeholder:text-[#777777] text-[16px] text-white"
                 onChange={onChange}
                 placeholder={placeholder}

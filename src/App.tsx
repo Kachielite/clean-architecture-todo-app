@@ -4,12 +4,13 @@ import AppRoutes from "./core/routes";
 import Loader from "./shared/presentation/components/common/Loader";
 import AppPallete from "./core/theme/app_pallete";
 import 'react-toastify/dist/ReactToastify.css';
-import useCheckAuth from "./features/auth/presentation/hooks/useCheckAuth";
+import useAuth from "./features/auth/presentation/hooks/useAuth";
 
 
 const App = () => {
     const {background} = AppPallete;
-    const {status} = useCheckAuth();
+    const {isCheckingAuth} = useAuth()
+
 
     return (
         <>
@@ -18,7 +19,7 @@ const App = () => {
                 className="h-[100vh] w-[100vw] flex justify-center items-center"
                 style={{backgroundColor: background}}
             >
-                {status === "loading" ? <Loader/> : <AppRoutes/>}
+                {isCheckingAuth ? <Loader/> : <AppRoutes/>}
             </div>
         </>
     );

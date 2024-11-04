@@ -15,7 +15,7 @@ export class SignUpUseCase extends UseCase<User, SignUpUseCaseParams> {
     }
 
     async execute(params: SignUpUseCaseParams): Promise<Either<Failure, User>> {
-        return await this.authRepository.signUpWithEmailAndPassword(params.id, params.email, params.name, params.password)
+        return await this.authRepository.signUpWithEmailAndPassword(params.id, params.email, params.password, params.name,)
     }
 
 }
