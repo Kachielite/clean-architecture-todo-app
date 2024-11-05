@@ -1,5 +1,5 @@
 import AppPallete from "../../../../core/theme/app_pallete";
-import AddIcon from "../../../../shared/assets/icons/add.png";
+import AddIcon from "../../../../assets/icons/add.png";
 import {Todo} from "../../domain/entity/todo";
 
 type AddTodoProps = {

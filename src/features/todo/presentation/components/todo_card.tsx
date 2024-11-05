@@ -1,7 +1,7 @@
 import {Todo} from "../../domain/entity/todo";
 import AppPallete from "../../../../core/theme/app_pallete";
-import DoneIcon from "../../../../shared/assets/icons/done.png";
-import DeleteIcon from "../../../../shared/assets/icons/delete.png";
+import DoneIcon from "../../../../assets/icons/done.png";
+import DeleteIcon from "../../../../assets/icons/delete.png";
 
 type TodoCardProps = {
     todo: Todo;
