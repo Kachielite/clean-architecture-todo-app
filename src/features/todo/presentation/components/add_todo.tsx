@@ -1,8 +1,17 @@
 import AppPallete from "../../../../core/theme/app_pallete";
 import AddIcon from "../../../../shared/assets/icons/add.png";
+import {Todo} from "../../domain/entity/todo";
 
-const AddTodo = () => {
+type AddTodoProps = {
+    newTodo?: Todo | null;
+    onBlurHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    addTodoHandler: () => void;
+}
+
+
+const AddTodo = ({onBlurHandler, addTodoHandler, newTodo}: AddTodoProps) => {
     const {primary, secondary} = AppPallete;
+
     return (
         <div
             className="w-full flex flex-row justify-between items-center"
@@ -12,12 +21,13 @@ const AddTodo = () => {
                 placeholder="Add a new task"
                 style={{backgroundColor: primary, border: `1px solid ${secondary}`}}
                 type="text"
-                onChange={(e) => console.log(e.target.value)}
+                onBlur={onBlurHandler}
+                value={newTodo?.title}
             />
             <button
                 className="size-[40px] rounded-[10px] flex justify-center items-center"
                 style={{backgroundColor: secondary}}
-                onClick={() => null}
+                onClick={addTodoHandler}
             >
                 <img src={AddIcon} alt="plus icon"/>
             </button>

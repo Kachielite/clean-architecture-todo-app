@@ -21,7 +21,6 @@ const useAuth = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isCheckingAuth, setIsCheckingAuth] = useState(false);
     const [userData, setUserData] = useState({name: '', email: '', password: ''});
-    ;
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         const id = e.target.id;

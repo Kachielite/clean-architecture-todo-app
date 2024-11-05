@@ -1,6 +1,6 @@
 import {TodoModel} from "../model/todo_model";
 import {COLLECTION_ID, DATABASE_ID} from "../../../../core/secrets/secrets";
-import {Databases, ID} from "appwrite";
+import {Databases} from "appwrite";
 import {ServerException} from "../../../../core/error/server_expection";
 
 export interface TodoDatasource {
@@ -14,16 +14,16 @@ export interface TodoDatasource {
 }
 
 export class TodoDatasourceImpl implements TodoDatasource {
+    databaseID: string = DATABASE_ID as string;
+    collectionID: string = COLLECTION_ID as string;
+
     constructor(private database: Databases) {
     }
 
     async addTodo(todo: TodoModel): Promise<TodoModel> {
         try {
-            if (DATABASE_ID && COLLECTION_ID) {
-                const response = await this.database.createDocument(DATABASE_ID, COLLECTION_ID, ID.unique(), TodoModel.toJson(todo));
-                return TodoModel.fromJson(response);
-            }
-            throw new ServerException("Database or Collection ID is missing");
+            const response = await this.database.createDocument(this.databaseID, this.collectionID, todo.id, TodoModel.toJson(todo));
+            return TodoModel.fromJson(response);
         } catch (e: unknown) {
             if (e instanceof Error) {
                 throw new ServerException(e.message);
@@ -35,12 +35,8 @@ export class TodoDatasourceImpl implements TodoDatasource {
 
     async deleteTodo(id: string): Promise<string> {
         try {
-            if (DATABASE_ID && COLLECTION_ID) {
-                await this.database.deleteDocument(DATABASE_ID, COLLECTION_ID, id);
-                return 'Todo deleted successfully';
-            }
-            throw new ServerException("Database or Collection ID is missing");
-
+            await this.database.deleteDocument(this.databaseID, this.collectionID, id);
+            return 'Todo deleted successfully';
         } catch (e: unknown) {
             if (e instanceof Error) {
                 throw new ServerException(e.message);
@@ -52,11 +48,9 @@ export class TodoDatasourceImpl implements TodoDatasource {
 
     async getTodos(): Promise<TodoModel[]> {
         try {
-            if (DATABASE_ID && COLLECTION_ID) {
-                const response = await this.database.listDocuments(DATABASE_ID, COLLECTION_ID);
-                return response.documents.map((doc) => TodoModel.fromJson(doc));
-            }
-            throw new ServerException("Database or Collection ID is missing");
+            const response = await this.database.listDocuments(this.databaseID, this.collectionID);
+            console.log("response", response);
+            return response.documents.map((doc) => TodoModel.fromJson(doc));
         } catch (e: unknown) {
             if (e instanceof Error) {
                 throw new ServerException(e.message);
@@ -68,11 +62,8 @@ export class TodoDatasourceImpl implements TodoDatasource {
 
     async updateTodo(todo: TodoModel): Promise<TodoModel> {
         try {
-            if (DATABASE_ID && COLLECTION_ID) {
-                const response = await this.database.updateDocument(DATABASE_ID, COLLECTION_ID, todo.id, TodoModel.toJson(todo));
-                return TodoModel.fromJson(response);
-            }
-            throw new ServerException("Database or Collection ID is missing");
+            const response = await this.database.updateDocument(this.databaseID, this.collectionID, todo.id, TodoModel.toJson(todo));
+            return TodoModel.fromJson(response);
         } catch (e: unknown) {
             if (e instanceof Error) {
                 throw new ServerException(e.message);

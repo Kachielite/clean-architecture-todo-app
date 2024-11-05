@@ -30,7 +30,7 @@ export const getCurrentUserUseCase = new GetCurrentUserUseCase(authRepository);
 
 // Todo Dependency Injection
 const todoRepository = new TodoRepositoryImpl(new TodoDatasourceImpl(database));
-const createTodoUseCase = new CreateTodoUseCase(todoRepository);
-const getTodosUseCase = new GetTodosUseCase(todoRepository);
-const deleteTodoUseCase = new DeleteTodoUseCase(todoRepository);
-const updateTodoUseCase = new UpdateTodoUseCase(todoRepository);
+export const createTodoUseCase = new CreateTodoUseCase(todoRepository);
+export const getTodosUseCase = new GetTodosUseCase(todoRepository);
+export const deleteTodoUseCase = new DeleteTodoUseCase(todoRepository);
+export const updateTodoUseCase = new UpdateTodoUseCase(todoRepository);

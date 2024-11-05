@@ -18,7 +18,7 @@ export class UpdateTodoUseCase extends UseCase<Todo, UpdateTodoUseCaseParams> {
         const todo = new Todo(
             params.id,
             params.title,
-            params.isCompleted
+            params.isCompleted,
         );
 
         return await this.todoRepository.update(todo);
